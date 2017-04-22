@@ -41,42 +41,71 @@ impl Groups
 
     pub fn build(&self) -> Words
     {
+        let places: [&str; 7] = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"];
+
+        let built = self.1.iter()
+            .enumerate()
+            .filter_map(|tup|
+            {
+                let index = tup.0;
+                let group = tup.1;
+
+                match group.build()
+                {
+                    None => None,
+                    Some(mut words) =>
+                    {
+                        if places[index] != ""
+                        {
+                            words.add(Words::new(vec![
+                                Word::Space,
+                                Word::Number(places[index].to_owned())
+                            ]));
+                        }
+
+                        Some(words)
+                    }
+                }
+            })
+            .collect::<Vec<_>>();
+
+        if built.len() == 0
+        {
+            return Words::new(vec![
+                Word::Number("zero".to_owned())
+            ]);
+        }
+
+        let last = built.len() - 1;
+
         let mut words = Words::new(vec![]);
 
-        // i64::max is nine quintillion, so this should cover all the possible values
-        let places = vec!["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"];
-
-        for i in 0..self.1.len()
+        for tup in built.into_iter().rev()
+            .enumerate()
         {
-            let mut group = self.1[i].build();
+            let index = tup.0;
+            let group_words = tup.1;
 
-            if places[i] != ""
+            words.add(group_words);
+
+            if index != last
             {
-                group.add(Words::new(vec![
-                    Word::Space,
-                    Word::Number(places[i].to_owned())]))
+                words.add(Words::new(vec![
+                    Word::Comma
+                ]));
             }
-
-            if i != 0
-            {
-                group.add(Words::new(vec![Word::Comma]));
-            }
-
-            group.add(words);
-
-            words = group;
         }
 
         if self.0 == Sign::Negative
         {
-            let mut neg = Words::new(vec![
+            let mut temp = Words::new(vec![
                 Word::Number("negative".to_owned()),
                 Word::Space
             ]);
 
-            neg.add(words);
+            temp.add(words);
 
-            return neg;
+            return temp;
         }
 
         words
@@ -96,21 +125,31 @@ impl Group
 
         Group(hundreds, tens)
     }
-
-    pub fn build(&self) -> Words
+    pub fn val(&self) -> usize
     {
-        if self.0.is_zero()
+        self.0.val() * 100 + self.1.val()
+    }
+
+    pub fn build(&self) -> Option<Words>
+    {
+        match (self.0.build(), self.1.build())
         {
-            return self.1.build()
+            (None, None) => return None,
+            (Some(hun), None) => return Some(hun),
+            (None, Some(ten)) =>
+            {
+                return Some(ten)
+            },
+            (Some(mut hun), Some(ten)) =>
+            {
+                hun.add(Words::new(vec![
+                    Word::And]));
+                
+                hun.add(ten);
+
+                return Some(hun)
+            }
         }
-
-        let mut words = self.0.build();
-
-        words.add(Words::new(vec![Word::And]));
-
-        words.add(self.1.build());
-
-        words
     }
 }
 

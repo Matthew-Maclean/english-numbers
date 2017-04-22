@@ -11,19 +11,19 @@ impl Hundreds
         Hundreds(val as u8)
     }
 
-    pub fn is_zero(&self) -> bool
+    pub fn val(&self) -> usize
     {
-        self.0 == 0
+        self.0 as usize
     }
 
-    pub fn build(&self) -> Words
+    pub fn build(&self) -> Option<Words>
     {
         if self.0 == 0
         {
-            return Words::new(vec![])
+            return None
         }
 
-        return Words::new(vec![Word::Number(match self.0
+        return Some(Words::new(vec![Word::Number(match self.0
         {
             1 => "one",
             2 => "two",
@@ -37,6 +37,6 @@ impl Hundreds
             _ => unreachable!()
         }.to_owned()),
         Word::Space,
-        Word::Number("hundred".to_owned())])
+        Word::Number("hundred".to_owned())]))
     }
 }

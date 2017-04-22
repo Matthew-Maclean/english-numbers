@@ -16,13 +16,22 @@ impl Tens
         Tens(tens_place, ones_place)
     }
 
-    pub fn build(&self) -> Words
+    pub fn val(&self) -> usize
+    {
+        (self.0 * 10 + self.1) as usize
+    }
+
+    pub fn build(&self) -> Option<Words>
     {
         if self.0 * 10 + self.1 < 20
         {
-            return Words::new(vec![Word::Number(match self.0 * 10 + self.1
+            if self.0 * 10 + self.1 == 0
             {
-                0 => "zero",
+                return None
+            }
+
+            return Some(Words::new(vec![Word::Number(match self.0 * 10 + self.1
+            {
                 1 => "one",
                 2 => "two",
                 3 => "three",
@@ -43,7 +52,7 @@ impl Tens
                 18 => "eighteen",
                 19 => "nineteen",
                 _ => unreachable!()
-            }.to_owned())])
+            }.to_owned())]))
         }
         else
         {
@@ -62,7 +71,7 @@ impl Tens
 
             if self.1 == 0
             {
-                return Words::new(vec![Word::Number(tens.to_owned())])
+                return Some(Words::new(vec![Word::Number(tens.to_owned())]))
             }
             else
             {
@@ -81,11 +90,11 @@ impl Tens
                     _ => unreachable!()
                 };
 
-                return Words::new(vec![
+                return Some(Words::new(vec![
                     Word::Number(tens.to_owned()),
                     Word::Dash,
                     Word::Number(ones.to_owned())
-                ])
+                ]))
             }
         }
     }

@@ -26,7 +26,6 @@ fn test_words()
 #[test]
 fn test_tens()
 {
-    let zero = Tens::new(0);
     let nineteen = Tens::new(19);
 
     let twenty = Tens::new(20);
@@ -34,18 +33,15 @@ fn test_tens()
 
     let all = Formatting::all();
     let none = Formatting::none();
+    
+    assert_eq!(nineteen.build().unwrap().build(all), "Nineteen");
+    assert_eq!(nineteen.build().unwrap().build(none), "nineteen");
 
-    assert_eq!(zero.build().build(all), "Zero");
-    assert_eq!(zero.build().build(none), "zero");
+    assert_eq!(twenty.build().unwrap().build(all), "Twenty");
+    assert_eq!(twenty.build().unwrap().build(none), "twenty");
 
-    assert_eq!(nineteen.build().build(all), "Nineteen");
-    assert_eq!(nineteen.build().build(none), "nineteen");
-
-    assert_eq!(twenty.build().build(all), "Twenty");
-    assert_eq!(twenty.build().build(none), "twenty");
-
-    assert_eq!(ninetynine.build().build(all), "Ninety-Nine");
-    assert_eq!(ninetynine.build().build(none), "ninetynine");
+    assert_eq!(ninetynine.build().unwrap().build(all), "Ninety-Nine");
+    assert_eq!(ninetynine.build().unwrap().build(none), "ninetynine");
 }
 
 #[test]
@@ -57,11 +53,11 @@ fn test_hundreds()
     let all = Formatting::all();
     let none = Formatting::none();
 
-    assert_eq!(one.build().build(all), "One Hundred");
-    assert_eq!(one.build().build(none), "onehundred");
+    assert_eq!(one.build().unwrap().build(all), "One Hundred");
+    assert_eq!(one.build().unwrap().build(none), "onehundred");
 
-    assert_eq!(seven.build().build(all), "Seven Hundred");
-    assert_eq!(seven.build().build(none), "sevenhundred");
+    assert_eq!(seven.build().unwrap().build(all), "Seven Hundred");
+    assert_eq!(seven.build().unwrap().build(none), "sevenhundred");
 }
 
 #[test]
@@ -73,11 +69,11 @@ fn test_group()
     let all = Formatting::all();
     let none = Formatting::none();
 
-    assert_eq!(g87.build().build(all), "Eighty-Seven");
-    assert_eq!(g87.build().build(none), "eightyseven");
+    assert_eq!(g87.build().unwrap().build(all), "Eighty-Seven");
+    assert_eq!(g87.build().unwrap().build(none), "eightyseven");
 
-    assert_eq!(g834.build().build(all), "Eight Hundred and Thirty-Four");
-    assert_eq!(g834.build().build(none), "eighthundredthirtyfour");
+    assert_eq!(g834.build().unwrap().build(all), "Eight Hundred and Thirty-Four");
+    assert_eq!(g834.build().unwrap().build(none), "eighthundredthirtyfour");
 }
 
 #[test]
@@ -86,18 +82,22 @@ fn test_groups()
     let g1 = Groups::new(1);
     let gneg1 = Groups::new(-1);
 
+    let g1000 = Groups::new(1000);
+
     let g123456789 = Groups::new(123_456_789);
 
     let g9223372036854775807 = Groups::new(9223372036854775807); // i64::MAX
 
     let all = Formatting::all();
     let none = Formatting::none();
-
+    
     assert_eq!(g1.build().build(all), "One");
     assert_eq!(g1.build().build(none), "one");
 
     assert_eq!(gneg1.build().build(all), "Negative One");
     assert_eq!(gneg1.build().build(none), "negativeone");
+
+    assert_eq!(g1000.build().build(all), "One Thousand");
 
     assert_eq!(g123456789.build().build(all), "One Hundred and Twenty-Three Million, Four Hundred and Fifty-Six Thousand, Seven Hundred and Eighty-Nine");
     assert_eq!(g123456789.build().build(none), "onehundredtwentythreemillionfourhundredfiftysixthousandsevenhundredeightynine");
