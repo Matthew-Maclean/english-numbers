@@ -26,7 +26,8 @@ pub enum Word
     Number(String),
     And,
     Dash,
-    Comma
+    Comma,
+    Space,
 }
 
 impl Word
@@ -79,6 +80,14 @@ impl Word
                 String::from(", ")
             }
             else if fmt.spaces
+            {
+                String::from(" ")
+            }
+            else
+            {
+                String::new()
+            },
+            &Word::Space => if fmt.spaces
             {
                 String::from(" ")
             }

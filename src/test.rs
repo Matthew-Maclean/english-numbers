@@ -2,6 +2,7 @@ use words::{Words, Word};
 use formatting::Formatting;
 
 use tens::Tens;
+use hundreds::Hundreds;
 
 #[test]
 fn test_words()
@@ -42,4 +43,20 @@ fn test_tens()
 
     assert_eq!(ninetynine.build().build(all), "Ninety-Nine");
     assert_eq!(ninetynine.build().build(none), "ninetynine");
+}
+
+#[test]
+fn test_hundreds()
+{
+    let one = Hundreds::new(1);
+    let seven = Hundreds::new(7);
+
+    let all = Formatting::all();
+    let none = Formatting::none();
+
+    assert_eq!(one.build().build(all), "One Hundred");
+    assert_eq!(one.build().build(none), "onehundred");
+
+    assert_eq!(seven.build().build(all), "Seven Hundred");
+    assert_eq!(seven.build().build(none), "sevenhundred");
 }
