@@ -1,6 +1,6 @@
 [package]
 name = "english-numbers"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["Matthew Maclean"]
 description = "Convert integers to enlish number format"
 keywords = ["english", "number", "convert", "format"]
