@@ -1,3 +1,5 @@
+use words::{Word, Words};
+
 use tens::*;
 use hundreds::*;
 
@@ -27,10 +29,26 @@ impl Group
     {
         assert!(val < 1000);
 
-        let hundreds = Hundreds::new(val % 1000);
-        let tens = Tens::new(val / 1000);
+        let hundreds = Hundreds::new(val / 100);
+        let tens = Tens::new(val % 100);
 
         Group(hundreds, tens)
+    }
+
+    pub fn build(&self) -> Words
+    {
+        if self.0.is_zero()
+        {
+            return self.1.build()
+        }
+
+        let mut words = self.0.build();
+
+        words.add(Words::new(vec![Word::And]));
+
+        words.add(self.1.build());
+
+        words
     }
 }
 

@@ -3,6 +3,7 @@ use formatting::Formatting;
 
 use tens::Tens;
 use hundreds::Hundreds;
+use groups::{Groups, Group};
 
 #[test]
 fn test_words()
@@ -59,4 +60,20 @@ fn test_hundreds()
 
     assert_eq!(seven.build().build(all), "Seven Hundred");
     assert_eq!(seven.build().build(none), "sevenhundred");
+}
+
+#[test]
+fn test_group()
+{
+    let g87 = Group::new(87);
+    let g834 = Group::new(834);
+
+    let all = Formatting::all();
+    let none = Formatting::none();
+
+    assert_eq!(g87.build().build(all), "Eighty-Seven");
+    assert_eq!(g87.build().build(none), "eightyseven");
+
+    assert_eq!(g834.build().build(all), "Eight Hundred and Thirty-Four");
+    assert_eq!(g834.build().build(none), "eighthundredthirtyfour");
 }

@@ -11,11 +11,16 @@ impl Hundreds
         Hundreds(val as u8)
     }
 
+    pub fn is_zero(&self) -> bool
+    {
+        self.0 == 0
+    }
+
     pub fn build(&self) -> Words
     {
         if self.0 == 0
         {
-            return Words::new(vec![Word::Number(String::new())])
+            return Words::new(vec![])
         }
 
         return Words::new(vec![Word::Number(match self.0
