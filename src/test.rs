@@ -5,6 +5,8 @@ use tens::Tens;
 use hundreds::Hundreds;
 use groups::{Groups, Group};
 
+use super::convert;
+
 #[test]
 fn test_words()
 {

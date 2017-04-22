@@ -18,3 +18,17 @@ pub fn convert(val: i64, fmt: Formatting) -> String
         .build()
         .build(fmt)
 }
+
+pub fn convert_all_fmt(val: i64) -> String
+{
+    groups::Groups::new(val)
+        .build()
+        .build(Formatting::all())
+}
+
+pub fn convert_no_fmt(val: i64) -> String
+{
+    groups::Groups::new(val)
+        .build()
+        .build(Formatting::none())
+}
