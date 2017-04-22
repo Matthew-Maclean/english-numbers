@@ -5,6 +5,8 @@ Convert your boring old `i64`'s to shiny new `String`'s!
 Use this libary to spell out numbers, as you would when reading them. Choose from a variety of formatting options,
 from title-case with spaces, commas, and 'and''s where they should be, to nothing but lowercase letters, and everything in between.
 
+[crates](https://crates.io/crates/english-numbers)
+
 ## Important Functions
 
     fn convert(val: i64, fmt: Formatting) -> String
@@ -22,7 +24,7 @@ Much better, right?
 
     fn convert_no_fmt(val: i64) -> String
 
-Use this functions to get an output as bare-bones as possible, no spaces, no hyphens, no nothing! Example:
+Use this function to get an output as bare-bones as possible, no spaces, no hyphens, no nothing! Example:
 
     9223372036854775807 -> "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven"
     
