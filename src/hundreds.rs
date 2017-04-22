@@ -11,11 +11,6 @@ impl Hundreds
         Hundreds(val as u8)
     }
 
-    pub fn val(&self) -> usize
-    {
-        self.0 as usize
-    }
-
     pub fn build(&self) -> Option<Words>
     {
         if self.0 == 0
