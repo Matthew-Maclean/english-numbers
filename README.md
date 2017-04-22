@@ -49,4 +49,4 @@ Use this to convert using the "long" numbering format, used in the EU and French
     
 This struct handles all the formatting options that you can specify, feel free to mix-and-match to *your* needs!
 
-Use the functions `Formatting::all()` and `Formatting::none()` to get the pre-build formatting values you expect.
+Use the functions `Formatting::all()` and `Formatting::none()` to get the pre-built formatting values you expect.
