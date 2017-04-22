@@ -1,5 +1,3 @@
-[![Crates.io](https://img.shields.io/crates/v/english-numbers.svg)]()
-
 # english-numbers
 
 Convert your boring old `i64`'s to shiny new `String`'s!
