@@ -148,10 +148,6 @@ impl Group
 
         Group(hundreds, tens)
     }
-    pub fn val(&self) -> usize
-    {
-        self.0.val() * 100 + self.1.val()
-    }
 
     pub fn build(&self) -> Option<Words>
     {

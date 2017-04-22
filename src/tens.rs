@@ -16,11 +16,6 @@ impl Tens
         Tens(tens_place, ones_place)
     }
 
-    pub fn val(&self) -> usize
-    {
-        (self.0 * 10 + self.1) as usize
-    }
-
     pub fn build(&self) -> Option<Words>
     {
         if self.0 * 10 + self.1 < 20
