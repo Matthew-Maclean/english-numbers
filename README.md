@@ -24,7 +24,7 @@ Much better, right?
 
     fn convert_no_fmt(val: i64) -> String
 
-Use this functions to get an output as bare-bones as possible, no spaces, no hyphens, no nothing! Example:
+Use this function to get an output as bare-bones as possible, no spaces, no hyphens, no nothing! Example:
 
     9223372036854775807 -> "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven"
     
