@@ -1,6 +1,6 @@
 //! # english-numbers
 //!
-//! A library for converting integer to their written-english formats.  
+//! A library for converting integers to their written-english formats.  
 //! Supports both American "short" and European "long" number formats.
 
 mod groups;

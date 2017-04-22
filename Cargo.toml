@@ -2,7 +2,7 @@
 name = "english-numbers"
 version = "0.3.2"
 authors = ["Matthew Maclean"]
-description = "Convert integers to enlish number format"
+description = "Convert integers to written English number format"
 keywords = ["english", "number", "convert", "format"]
 license = "MIT"
 license-file = "LICENCE"
