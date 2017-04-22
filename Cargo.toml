@@ -1,6 +1,6 @@
 [package]
 name = "english-numbers"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Matthew Maclean"]
 description = "Convert integers to enlish number format"
 keywords = ["english", "number", "convert", "format"]
@@ -8,3 +8,4 @@ license = "MIT"
 license-file = "LICENCE"
 readme = "README.md"
 repository = "https://github.com/Matthew-Maclean/english-numbers"
+documentation = "https://docs.rs/english-numbers"
