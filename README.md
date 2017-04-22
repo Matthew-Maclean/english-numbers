@@ -30,6 +30,12 @@ Use this function to get an output as bare-bones as possible, no spaces, no hyph
     
 If that isn't easy to read, I don't know what is!
 
+    fn convert_long(val: i64, fmt: Formatting) -> String
+
+Use this to convert using the "long" numbering format, used in the EU and French Canada. Example:
+
+    1000000000000 -> "One Thousand Million"
+
 ## Important Structs
 
     struct Formatting
