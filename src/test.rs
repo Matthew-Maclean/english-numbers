@@ -5,7 +5,7 @@ use tens::Tens;
 use hundreds::Hundreds;
 use groups::{Groups, Group};
 
-use super::convert;
+use super::convert_all_fmt;
 
 #[test]
 fn test_words()
@@ -104,4 +104,15 @@ fn test_groups()
 
     assert_eq!(g9223372036854775807.build().build(all), "Nine Quintillion, Two Hundred and Twenty-Three Quadrillion, Three Hundred and Seventy-Two Trillion, Thirty-Six Billion, Eight Hundred and Fifty-Four Million, Seven Hundred and Seventy-Five Thousand, Eight Hundred and Seven");
     assert_eq!(g9223372036854775807.build().build(none), "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven");
+}
+
+#[test]
+fn test_convert()
+{
+    assert_eq!(convert_all_fmt(0), "Zero");
+    assert_eq!(convert_all_fmt(1), "One");
+    assert_eq!(convert_all_fmt(-10), "Negative Ten");
+    assert_eq!(convert_all_fmt(1000), "One Thousand");
+    assert_eq!(convert_all_fmt(100000), "One Hundred Thousand");
+    assert_eq!(convert_all_fmt(1000000), "One Million");
 }
