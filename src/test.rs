@@ -77,3 +77,29 @@ fn test_group()
     assert_eq!(g834.build().build(all), "Eight Hundred and Thirty-Four");
     assert_eq!(g834.build().build(none), "eighthundredthirtyfour");
 }
+
+#[test]
+fn test_groups()
+{
+    let g1 = Groups::new(1);
+    let gneg1 = Groups::new(-1);
+
+    let g123456789 = Groups::new(123_456_789);
+
+    let g9223372036854775807 = Groups::new(9223372036854775807); // i64::MAX
+
+    let all = Formatting::all();
+    let none = Formatting::none();
+
+    assert_eq!(g1.build().build(all), "One");
+    assert_eq!(g1.build().build(none), "one");
+
+    assert_eq!(gneg1.build().build(all), "Negative One");
+    assert_eq!(gneg1.build().build(none), "negativeone");
+
+    assert_eq!(g123456789.build().build(all), "One Hundred and Twenty-Three Million, Four Hundred and Fifty-Six Thousand, Seven Hundred and Eighty-Nine");
+    assert_eq!(g123456789.build().build(none), "onehundredtwentythreemillionfourhundredfiftysixthousandsevenhundredeightynine");
+
+    assert_eq!(g9223372036854775807.build().build(all), "Nine Quintillion, Two Hundred and Twenty-Three Quadrillion, Three Hundred and Seventy-Two Trillion, Thirty-Six Billion, Eight Hundred and Fifty-Four Million, Seven Hundred and Seventy-Five Thousand, Eight Hundred and Seven");
+    assert_eq!(g9223372036854775807.build().build(none), "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven");
+}
