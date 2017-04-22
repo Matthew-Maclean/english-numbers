@@ -1,5 +1,6 @@
 use formatting::Formatting;
 
+#[derive(Clone)]
 pub struct Words(Vec<Word>);
 
 impl Words
@@ -19,8 +20,14 @@ impl Words
         self.0.iter()
             .fold(String::new(), |mut acc, item| { acc.push_str(&item.build(fmt)); acc })
     }
+
+    pub fn is_empty(&self) -> bool
+    {
+        self.0.len() == 0
+    }
 }
 
+#[derive(Clone)]
 pub enum Word
 {
     Number(String),

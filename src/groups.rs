@@ -39,9 +39,34 @@ impl Groups
         Groups(sign, groups)
     }
 
-    pub fn build(&self) -> Words
+    pub fn build(&self, long: bool) -> Words
     {
-        let places: [&str; 7] = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"];
+        let places: [Words; 7] = if long
+        {
+            [Words::new(vec![]),
+                Words::new(vec![Word::Number("thousand".to_owned())]),
+                Words::new(vec![Word::Number("milliard".to_owned())]),
+                Words::new(vec![Word::Number("million".to_owned())]),
+                Words::new(vec![
+                    Word::Number("thousand".to_owned()),
+                    Word::Space,
+                    Word::Number("million".to_owned())]),
+                Words::new(vec![Word::Number("billion".to_owned())]),
+                Words::new(vec![
+                    Word::Number("thousand".to_owned()),
+                    Word::Space,
+                    Word::Number("billion".to_owned())])]
+        }
+        else
+        {
+            [Words::new(vec![]),
+                Words::new(vec![Word::Number("thousand".to_owned())]),
+                Words::new(vec![Word::Number("million".to_owned())]),
+                Words::new(vec![Word::Number("billion".to_owned())]),
+                Words::new(vec![Word::Number("trillion".to_owned())]),
+                Words::new(vec![Word::Number("quadrillion".to_owned())]),
+                Words::new(vec![Word::Number("quintillion".to_owned())])]
+        };
 
         let built = self.1.iter()
             .enumerate()
@@ -55,12 +80,10 @@ impl Groups
                     None => None,
                     Some(mut words) =>
                     {
-                        if places[index] != ""
+                        if !places[index].is_empty()
                         {
-                            words.add(Words::new(vec![
-                                Word::Space,
-                                Word::Number(places[index].to_owned())
-                            ]));
+                            words.add(Words::new(vec![Word::Space]));
+                            words.add(places[index].clone());
                         }
 
                         Some(words)

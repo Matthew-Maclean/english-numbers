@@ -91,19 +91,29 @@ fn test_groups()
     let all = Formatting::all();
     let none = Formatting::none();
     
-    assert_eq!(g1.build().build(all), "One");
-    assert_eq!(g1.build().build(none), "one");
+    assert_eq!(g1.build(false).build(all), "One");
+    assert_eq!(g1.build(false).build(none), "one");
 
-    assert_eq!(gneg1.build().build(all), "Negative One");
-    assert_eq!(gneg1.build().build(none), "negativeone");
+    assert_eq!(gneg1.build(false).build(all), "Negative One");
+    assert_eq!(gneg1.build(false).build(none), "negativeone");
 
-    assert_eq!(g1000.build().build(all), "One Thousand");
+    assert_eq!(g1000.build(false).build(all), "One Thousand");
 
-    assert_eq!(g123456789.build().build(all), "One Hundred and Twenty-Three Million, Four Hundred and Fifty-Six Thousand, Seven Hundred and Eighty-Nine");
-    assert_eq!(g123456789.build().build(none), "onehundredtwentythreemillionfourhundredfiftysixthousandsevenhundredeightynine");
+    assert_eq!(g123456789.build(false).build(all), "One Hundred and Twenty-Three Million, Four Hundred and Fifty-Six Thousand, Seven Hundred and Eighty-Nine");
+    assert_eq!(g123456789.build(false).build(none), "onehundredtwentythreemillionfourhundredfiftysixthousandsevenhundredeightynine");
 
-    assert_eq!(g9223372036854775807.build().build(all), "Nine Quintillion, Two Hundred and Twenty-Three Quadrillion, Three Hundred and Seventy-Two Trillion, Thirty-Six Billion, Eight Hundred and Fifty-Four Million, Seven Hundred and Seventy-Five Thousand, Eight Hundred and Seven");
-    assert_eq!(g9223372036854775807.build().build(none), "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven");
+    assert_eq!(g9223372036854775807.build(false).build(all), "Nine Quintillion, Two Hundred and Twenty-Three Quadrillion, Three Hundred and Seventy-Two Trillion, Thirty-Six Billion, Eight Hundred and Fifty-Four Million, Seven Hundred and Seventy-Five Thousand, Eight Hundred and Seven");
+    assert_eq!(g9223372036854775807.build(false).build(none), "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven");
+}
+
+#[test]
+fn test_long()
+{
+    assert_eq!(Groups::new(1000000).build(true).build(Formatting::all()), "One Milliard");
+    assert_eq!(Groups::new(1000000000).build(true).build(Formatting::all()), "One Million");
+    assert_eq!(Groups::new(1000000000000).build(true).build(Formatting::all()), "One Thousand Million");
+    assert_eq!(Groups::new(1000000000000000).build(true).build(Formatting::all()), "One Billion");
+    assert_eq!(Groups::new(1000000000000000000).build(true).build(Formatting::all()), "One Thousand Billion");
 }
 
 #[test]
