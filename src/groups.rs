@@ -13,15 +13,7 @@ impl Groups
 
         let val = i64::abs(val);
 
-        let groups = if val < i64::pow(10, 6 * 3) // if it's greater than 10 ^ 18, the numerical approach won't work
-        {
-            (0..)
-                .map(|step| (val / (i64::pow(10, step * 3))) % 1000)
-                .take_while(|n| *n != 0)
-                .map(|n| Group::new(n as usize))
-                .collect::<Vec<_>>()
-        }
-        else
+        let groups =
         {
             let mut val_string = val.to_string();
 
