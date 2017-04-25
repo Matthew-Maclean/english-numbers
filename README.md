@@ -8,11 +8,17 @@ Use this libary to spell out numbers, as you would when reading them. Choose fro
 from title-case with spaces, commas, and 'and''s where they should be, to nothing but lowercase letters, and everything in between.
 
 ## Important Functions
+
+### `convert`
+
 ```rust
 fn convert(val: i64, fmt: Formatting) -> String
 ```
 This is the base function, set your `val`, and then play around with the options in the `Formatting` struct to get the precise output
 you desire.
+
+### `convert_all_fmt`
+
 ```rust
 fn convert_all_fmt(val: i64) -> String
 ```
@@ -21,6 +27,9 @@ Use this function to get an output with all the bells and whistles, example:
     123456789 -> "One Hundred and Twenty-Three Million, Four Hundred and Fifty-Six Thousand, Seven Hundred and Eighty-Nine"
 
 Much better, right?
+
+### `convert_no_fmt`
+
 ```rust
 fn convert_no_fmt(val: i64) -> String
 ```
@@ -29,6 +38,9 @@ Use this function to get an output as bare-bones as possible, no spaces, no hyph
     9223372036854775807 -> "ninequintilliontwohundredtwentythreequadrillionthreehundredseventytwotrillionthirtysixbillioneighthundredfiftyfourmillionsevenhundredseventyfivethousandeighthundredseven"
     
 If that isn't easy to read, I don't know what is!
+
+### `convert_long`
+
 ```rust
 fn convert_long(val: i64, fmt: Formatting) -> String
 ```
@@ -37,6 +49,9 @@ Use this to convert using the "long" numbering format, used in the EU and French
     1000000000000 -> "One Thousand Million"
 
 ## Important Structs
+
+### `Formatting`
+
 ```rust
 struct Formatting
 {
